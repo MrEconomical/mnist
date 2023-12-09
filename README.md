@@ -1,0 +1,1 @@
+A classifer for hand-drawn digit images from the MNIST dataset implemented in Python.
