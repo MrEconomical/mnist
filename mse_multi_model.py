@@ -77,7 +77,7 @@ class Model:
         output_deltas = (output - expected) * (output * (1 - output)) # using sigmoid derivative
         output_gradients = np.empty((self.output_size, self.hidden_size + 1))
         output_gradients[:, :-1] = np.outer(output_deltas, hidden_output) # set output weight derivatives
-        output_gradients[:, -1:] = output_deltas # bias is a fixed input of 1
+        output_gradients[:, -1:] = np.reshape(output_deltas, (self.output_size, 1)) # bias is a fixed input of 1
 
         # calculate gradients for hidden neurons using relu derivative
 

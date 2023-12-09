@@ -6,21 +6,21 @@ Model = mse_multi_model.Model
 # ternary inputs and outputs
 
 ternary_cases = [
-    ([0, 0, 0], [0]),
-    ([0, 0, 1], [1]),
-    ([0, 1, 0], [0]),
-    ([0, 1, 1], [1]),
-    ([1, 0, 0], [0]),
-    ([1, 0, 1], [0]),
-    ([1, 1, 0], [1]),
-    ([1, 1, 1], [1]),
+    ([0, 0, 0], [0, 1]),
+    ([0, 0, 1], [1, 0]),
+    ([0, 1, 0], [0, 1]),
+    ([0, 1, 1], [1, 0]),
+    ([1, 0, 0], [0, 1]),
+    ([1, 0, 1], [0, 1]),
+    ([1, 1, 0], [1, 0]),
+    ([1, 1, 1], [1, 0]),
 ]
 
 # train model over epochs
 
 input_size = 3
 hidden_size = 6
-output_size = 1
+output_size = 2
 learning_rate = 0.02
 epochs = 20000
 model = Model.with_random_weights(input_size, hidden_size, output_size, learning_rate)
