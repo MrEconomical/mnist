@@ -9,7 +9,7 @@ output_size = 10
 learning_rate = 0.001
 model = Model.with_random_weights(input_size, hidden_size, output_size, learning_rate)
 
-epochs = 5
+epochs = 10
 log_interval = 20000
 
 for e in range(epochs):
