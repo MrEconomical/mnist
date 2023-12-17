@@ -90,7 +90,9 @@ class Model:
 
         # return gradients and error
 
-        return hidden_gradients, output_gradients, (expected - output) ** 2
+        difference = expected - output
+        error = difference.dot(difference) / len(difference)
+        return hidden_gradients, output_gradients, error
     
     # update weights with gradients
 
