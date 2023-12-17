@@ -1,7 +1,5 @@
-import mse_single_model
+from mse_single_model import Model
 import random
-
-Model = mse_single_model.Model
 
 # ternary inputs and outputs
 

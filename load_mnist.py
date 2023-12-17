@@ -17,4 +17,4 @@ test_data = []
 test_file = open("data/mnist_test.csv")
 for row in csv.reader(test_file):
     test_data.append(parse_row(row))
-print("parsed", len(test_data), "test imgaes")
+print("parsed", len(test_data), "test images")

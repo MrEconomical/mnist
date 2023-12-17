@@ -1,8 +1,6 @@
-import mse_batch_model
+from mse_batch_model import Model
 import numpy as np
 import random
-
-Model = mse_batch_model.Model
 
 # ternary inputs and outputs
 
