@@ -94,7 +94,8 @@ class Model:
 
         # return mean squared error
 
-        return (expected - output) ** 2
+        difference = expected - output
+        return difference.dot(difference) / len(difference)
     
     # save model to file
 
