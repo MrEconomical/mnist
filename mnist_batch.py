@@ -47,6 +47,6 @@ print("evaluating model:")
 total_error = 0
 for image in test_data:
     hidden_output, output = model.forward(image[0])
-    difference = image[1] - output
-    total_error += difference.dot(difference) / len(difference)
+    error = -np.sum(np.multiply(image[1], np.log(output))) / len(output)
+    total_error += error
 print("error:", total_error / len(test_data))

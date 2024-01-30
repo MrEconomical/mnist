@@ -73,7 +73,7 @@ class Model:
     # update weights with back propagation
 
     def back_prop(self, input_data, hidden_output, output, expected):
-        # calculate gradients for output neuron using sigmoid derivative
+        # calculate gradients for output neuron using softmax derivative
 
         '''
         softmax_grad = np.diagflat(output) - np.outer(output, output) # find softmax jacobian
@@ -98,7 +98,7 @@ class Model:
         self.weights[0] -= self.learning_rate * hidden_gradients
         self.weights[1] -= self.learning_rate * output_gradients
 
-        # return cross entropy cost
+        # return cross entropy error
 
         return -np.sum(np.multiply(expected, np.log(output))) / len(output)
         

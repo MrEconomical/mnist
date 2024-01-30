@@ -1,6 +1,6 @@
 '''
 traditional cross entropy loss neural network model class with 1 hidden layer and
-1 output layer using relu for the hidden layer and sigmoid for the output layer
+1 output layer using relu for the hidden layer and softmax for the output layer
 with batched gradient updates
 '''
 
@@ -66,16 +66,17 @@ class Model:
         hidden_output = np.dot(self.weights[0][:, :-1], input_data) + self.weights[0][:, -1]
         np.maximum(hidden_output, 0, out=hidden_output) # relu activation
         output = np.dot(self.weights[1][:, :-1], hidden_output) + self.weights[1][:, -1]
-        output = 1 / (1 + np.exp(-output)) # sigmoid activation
+        np.exp(output - np.max(output), out=output) # softmax activation
+        output /= np.sum(output)
 
         return hidden_output, output
 
     # calculate gradients with back propagation
 
     def back_prop(self, input_data, hidden_output, output, expected):
-        # calculate gradients for output neuron using sigmoid derivative
+        # calculate gradients for output neuron using softmax derivative
 
-        output_deltas = (output - expected) * (output * (1 - output)) # using sigmoid derivative
+        output_deltas = output - expected # using softmax and cross-entropy derivative
         output_gradients = np.empty((self.output_size, self.hidden_size + 1))
         output_gradients[:, :-1] = np.outer(output_deltas, hidden_output) # set output weight derivatives
         output_gradients[:, -1:] = np.reshape(output_deltas, (self.output_size, 1)) # bias is a fixed input of 1
@@ -88,10 +89,9 @@ class Model:
         hidden_gradients[:, :-1] = np.outer(hidden_deltas, input_data) # set hidden weight derivatives
         hidden_gradients[:, -1:] = np.reshape(hidden_deltas, (self.hidden_size, 1)) # bias is a fixed input of 1
 
-        # return gradients and error
+        # return gradients and cross entropy error
 
-        difference = expected - output
-        error = difference.dot(difference) / len(difference)
+        error = -np.sum(np.multiply(expected, np.log(output))) / len(output)
         return hidden_gradients, output_gradients, error
     
     # update weights with gradients
