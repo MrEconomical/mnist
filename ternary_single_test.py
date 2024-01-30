@@ -1,4 +1,4 @@
-from models.mse_single_model import Model
+from models.single_model import Model
 import random
 
 # ternary inputs and outputs

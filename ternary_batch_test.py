@@ -1,4 +1,4 @@
-from models.mse_batch_model import Model
+from models.batch_model import Model
 import numpy as np
 import random
 

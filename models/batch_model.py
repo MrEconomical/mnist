@@ -1,6 +1,7 @@
 '''
-traditional mean squared error neural network model class with 1 hidden layer and
+traditional cross entropy loss neural network model class with 1 hidden layer and
 1 output layer using relu for the hidden layer and sigmoid for the output layer
+with batched gradient updates
 '''
 
 import json
@@ -69,7 +70,7 @@ class Model:
 
         return hidden_output, output
 
-    # update weights with back propagation
+    # calculate gradients with back propagation
 
     def back_prop(self, input_data, hidden_output, output, expected):
         # calculate gradients for output neuron using sigmoid derivative
@@ -87,15 +88,17 @@ class Model:
         hidden_gradients[:, :-1] = np.outer(hidden_deltas, input_data) # set hidden weight derivatives
         hidden_gradients[:, -1:] = np.reshape(hidden_deltas, (self.hidden_size, 1)) # bias is a fixed input of 1
 
-        # update model weights
-
-        self.weights[0] -= self.learning_rate * hidden_gradients
-        self.weights[1] -= self.learning_rate * output_gradients
-
-        # return mean squared error
+        # return gradients and error
 
         difference = expected - output
-        return difference.dot(difference) / len(difference)
+        error = difference.dot(difference) / len(difference)
+        return hidden_gradients, output_gradients, error
+    
+    # update weights with gradients
+
+    def apply_gradients(self, hidden_gradients, output_gradients):
+        self.weights[0] -= self.learning_rate * hidden_gradients
+        self.weights[1] -= self.learning_rate * output_gradients
     
     # save model to file
 
