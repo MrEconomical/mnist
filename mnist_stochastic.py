@@ -1,5 +1,5 @@
 from load_mnist import train_data, test_data
-from mse_multi_model import Model
+from models.mse_multi_model import Model
 import random
 
 # train model over epochs
