@@ -10,6 +10,7 @@ import numpy as np
 class Model:
     input_size = None
     hidden_size = None
+    output_size = None
     learning_rate = None
     weights = None
 
