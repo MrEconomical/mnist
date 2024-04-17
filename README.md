@@ -7,5 +7,5 @@ To compare the performance of stochastic and batched gradient descent, `mnist_st
 ## Results
 
 Both the stochastic and batch models already achieve a very high average accuracy with a small hidden layer of 40 neurons. After training for 10 epochs on the 60,000 image training data set, the results evaluated using cross-entropy error on the 10,000 image test data set are:
-- Stochastic model: 0.0110
-- Batch model: 0.0106
+- Stochastic model (batch size 1): 0.0110
+- Batch model (batch size 32): 0.0106
